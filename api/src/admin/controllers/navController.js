@@ -1,0 +1,136 @@
+const { MongoClient, ObjectId } = require('mongodb');
+const debug = require('debug')('app:navController');
+
+function navController (dbConfig) {
+  function checkUser (req, res, next) {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  }
+
+  function insertNewLink (req, res) {
+    let client;
+    (async () => {
+      try {
+        const link = req.body;
+
+        client = await MongoClient.connect(dbConfig.url, { useNewUrlParser: true });
+        const db = await client.db(dbConfig.dataB);
+        const col = await db.collection('link');
+
+        const result = await col.insertOne(link);
+        client.close();
+
+        if (result) {
+          res.json(result);
+        } else {
+          res.send('Error creating a link');
+        }
+      } catch (err) {
+        debug(err.stack);
+      }
+    })();
+  }
+
+  function getLinks (req, res) {
+    let client;
+    (async () => {
+      try {
+        client = await MongoClient.connect(dbConfig.url, {useNewUrlParser: true});
+        const db = await client.db(dbConfig.dataB);
+        const col = await db.collection('link');
+
+        const users = await col.find().toArray();
+        client.close();
+
+        if (users) {
+          res.json(users);
+        } else {
+          res.send('No links in data base');
+        }
+      } catch (err) {
+        debug(err.stack);
+      }
+    })();
+  }
+
+  function getOne (req, res) {
+    let client;
+    (async () => {
+      try {
+        const id = req.params.id;
+
+        client = await MongoClient.connect(dbConfig.url, { useNewUrlParser: true });
+        const db = await client.db(dbConfig.dataB);
+        const col = await db.collection('link');
+
+        const user = await col.findOne({_id: ObjectId(id)});
+        client.close();
+
+        if (user) {
+          res.json(user);
+        } else {
+          res.send('No link in data base, please check id');
+        }
+      } catch (err) {
+        debug(err.stack);
+      }
+    })();
+  }
+
+  function updateLink (req, res) {
+    let client;
+    (async () => {
+      try {
+        const id = req.params.id;
+        const data = req.body;
+
+        client = await MongoClient.connect(dbConfig.url, { useNewUrlParser: true });
+        const db = await client.db(dbConfig.dataB);
+        const col = await db.collection('link');
+
+        const r = await col.updateOne({_id: ObjectId(id)}, {$set: data});
+        client.close();
+
+        res.send('Link modified successfully');
+        debug(`Link updated successfully ${r.modifiedCount}`);
+      } catch (err) {
+        debug(err.stack);
+      }
+    })();
+  }
+
+  function removeLink (req, res) {
+    let client;
+    (async () => {
+      try {
+        const id = req.params.id;
+
+        client = await MongoClient.connect(dbConfig.url, { useNewUrlParser: true });
+        const db = await client.db(dbConfig.dataB);
+        const col = await db.collection('link');
+
+        const r = await col.deleteOne({_id: ObjectId(id)});
+        client.close();
+
+        res.send('Link deleted successfully');
+        debug(`link deleted ${r.deletedCount}`);
+      } catch (err) {
+        debug(err.stack);
+      }
+    })();
+  }
+
+  return {
+    checkUser,
+    insertNewLink,
+    getLinks,
+    getOne,
+    updateLink,
+    removeLink
+  };
+}
+
+module.exports = navController;

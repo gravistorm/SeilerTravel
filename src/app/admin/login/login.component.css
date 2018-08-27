@@ -1,0 +1,18 @@
+.card {
+  background-color: #F5F5F6;
+}
+
+.card-title{
+  color:#d68300;
+  font-size: 2rem;
+}
+
+.btn-primary{
+  background-color: #581a6d;
+  color: rgb(255, 255, 255, 0.8);
+}
+
+.btn-primary:hover{
+  background-color: #87479c;
+  color: rgb(255, 255, 255, 0.87);
+}

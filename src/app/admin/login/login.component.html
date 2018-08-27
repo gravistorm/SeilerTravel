@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row align-items-center justify-content-center">
+    <div class="card col-8 px-0 mt-5 shadow">
+      <img src="/assets/images/loginAdmin.png" alt="" class="card-img-top">
+      <div class="card-body py-5">
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="usernameAddon"><i class="fas fa-user"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="user.username" aria-describedby="usernameAddon" placeholder="User">
+              </div>
+              <div class="input-group input-group-lg mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="passwordAddon"><i class="fas fa-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" [(ngModel)]="user.password" aria-describedby="passwordAddon" placeholder="Password">
+              </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-3">
+            <button type="button" class="form-control btn btn-primary shadow-sm" (click)="checkUser()">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
