@@ -1,0 +1,9 @@
+.fas, .far{
+  color: rgb(255, 255, 255, 0.87)
+}
+
+.nav-link{
+  color: rgb(255, 255, 255, 0.87);
+  font-size: 14px;
+  font-family: 'Roboto Medium', sans-serif
+}

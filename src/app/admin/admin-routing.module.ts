@@ -5,19 +5,21 @@ import { LoginComponent } from './login/login.component';
 import { AdminGuardService } from './admin-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginService } from './login/login.service';
+import { NavigationComponent } from './navigation/navigation.component';
 
 const adminRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'admin',
     component: DashboardComponent,
-    canActivate: [AdminGuardService],
+    // canActivate: [AdminGuardService],
     children: [
       {
         path: '',
-        canActivateChild: [AdminGuardService],
+        // canActivateChild: [AdminGuardService],
         children: [
-          { path: 'dashboard', component: DashboardComponent }
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'navigation', component: NavigationComponent }
         ]
       }
     ]

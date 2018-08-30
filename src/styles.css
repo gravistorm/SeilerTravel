@@ -1,3 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
 body{
   background-color: #E1E2E1;
+}
+
+.bg-primary, .btn-primary{
+  background-color: #581a6d !important;
+}
+
+.bg-primary-dark{
+  background-color: #2b0041;
+}
+
+.bg-primary-light{
+  background-color: #87479c;
+}
+
+.bg-secondary{
+  background-color: #d58400 !important;
+}
+
+.bg-secondary-dark{
+  background-color: #9e5700;
+}
+
+.bg-secondary-light{
+  background-color: #ffb441
 }

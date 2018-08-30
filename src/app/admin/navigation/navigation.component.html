@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row p-4">
+    <div class="col-4 col-md-3 shadow-sm newItem text-center h2 py-2" (click)="showForm()">
+      <div *ngIf="!show; else newForm">
+        <i class="fas fa-plus fa-lg py-1"></i>
+      </div>
+      <ng-template #newForm>
+        <div class="input-group">
+          <input class="form-control py-2" [(ngModel)]="link.name" placeholder="NOMBRE">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-primary" (click)="add()"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

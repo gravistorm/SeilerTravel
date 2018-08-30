@@ -1,0 +1,14 @@
+h1{
+  color: rgb(255, 255, 255, 0.87)
+}
+
+.newItem {
+  transition: all 0.3s ease;
+  color: rgba(0, 0, 0, 0.57);
+  background-color: rgb(255, 255, 255, 0.67);
+}
+
+.newItem:hover {
+  background-color: rgb(255, 255, 255, 0.87);
+  color: rgba(0, 0, 0, 0.87);
+}

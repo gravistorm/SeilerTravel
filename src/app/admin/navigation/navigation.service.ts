@@ -3,23 +3,29 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 
-import { Users } from './users';
+import { Links } from './links';
 
 @Injectable()
-  export class LoginService {
-    user: Users;
-    redirectUrl: String;
-    isLogged = false;
+  export class NavigationService {
+    link: Links;
+    status: any;
 
-    constructor( private http: HttpClient ) {}
+    constructor( private http: HttpClient ) { }
 
-    checkUser(user: Users): Observable<Users> {
-      return this.http.post<Users>('api/admin', user)
+    createLink(link: Links): Observable<Links> {
+      return this.http.post<Links>('api/admin/navigation', link)
         .pipe(
           tap(data => {
-            this.isLogged = true;
-            this.user = data;
+            this.status = data;
           }),
+          catchError( err => this.handleError(err) )
+        );
+    }
+
+    getLink(): Observable<Links[]> {
+      return this.http.get<Links[]>('api/admin/navigation')
+        .pipe(
+          tap(data => console.log(`ALL: ${JSON.stringify(data)}`)),
           catchError( err => this.handleError(err))
         );
     }
@@ -35,9 +41,5 @@ import { Users } from './users';
       }
 
       return throwError(`Something bad happened: ${err.error.message}`);
-    }
-
-    logOut(): void {
-      this.isLogged = false;
     }
   }
