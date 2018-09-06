@@ -12,3 +12,56 @@ h1{
   background-color: rgb(255, 255, 255, 0.87);
   color: rgba(0, 0, 0, 0.87);
 }
+
+.newItemDisable{
+  transition: all 0.3s ease;
+  color: rgba(0, 0, 0, 0.45);
+  background-color: rgb(255, 255, 255, 0.55);
+}
+
+.newItemDisable:hover{
+  transition: all 0.3s ease;
+  color: rgba(0, 0, 0, 0.75);
+  background-color: rgb(255, 255, 255, 0.65);
+}
+
+.active {
+  transition: all 0.3s ease;
+  color: rgb(76, 176, 79, 0.87);
+}
+
+.active:hover {
+  color: rgb(76, 176, 79);
+}
+
+.inactive {
+  transition: all 0.3s ease;
+  color: rgb(244, 67, 54, 0.87);
+}
+
+.inactive:hover {
+  color: rgb(244, 67, 54);
+}
+
+.btn-primary-light {
+  border-radius: 0;
+  padding: 0
+}
+
+.success {
+  transition: color 0.3s ease;
+  color: rgb(174,216,128, 0.87)
+}
+
+.success:hover {
+  color: rgb(174,216,128);
+}
+
+.danger {
+  transition: all 0.3s ease;
+  color: rgb(218,97,108, 0.87);
+}
+
+.danger:hover {
+  color: rgb(218,97,108);
+}

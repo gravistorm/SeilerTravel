@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:navController');
 
 function navController (dbConfig) {
@@ -66,7 +66,7 @@ function navController (dbConfig) {
         const db = await client.db(dbConfig.dataB);
         const col = await db.collection('link');
 
-        const user = await col.findOne({_id: ObjectId(id)});
+        const user = await col.findOne({_id: ObjectID(id)});
         client.close();
 
         if (user) {
@@ -86,15 +86,16 @@ function navController (dbConfig) {
       try {
         const id = req.params.id;
         const data = req.body;
+        delete data._id;
 
         client = await MongoClient.connect(dbConfig.url, { useNewUrlParser: true });
         const db = await client.db(dbConfig.dataB);
         const col = await db.collection('link');
 
-        const r = await col.updateOne({_id: ObjectId(id)}, {$set: data});
+        const r = await col.updateOne({_id: ObjectID(id)}, {$set: data});
         client.close();
 
-        res.send('Link modified successfully');
+        res.json('Link modified successfully');
         debug(`Link updated successfully ${r.modifiedCount}`);
       } catch (err) {
         debug(err.stack);
@@ -112,10 +113,10 @@ function navController (dbConfig) {
         const db = await client.db(dbConfig.dataB);
         const col = await db.collection('link');
 
-        const r = await col.deleteOne({_id: ObjectId(id)});
+        const r = await col.deleteOne({_id: ObjectID(id)});
         client.close();
 
-        res.send('Link deleted successfully');
+        res.json('Link deleted successfully');
         debug(`link deleted ${r.deletedCount}`);
       } catch (err) {
         debug(err.stack);

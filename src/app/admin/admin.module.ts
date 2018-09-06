@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './share/navbar/navbar.component';
 import { NavigationService } from './navigation/navigation.service';
-import { CommonModule } from '@angular/common';
+import { AlertsComponent } from './share/alerts/alerts.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     DashboardComponent,
     NavigationComponent,
-    NavbarComponent
+    NavbarComponent,
+    AlertsComponent
   ],
   providers: [
     NavigationService

@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Links } from './links';
+import { pipe } from '@angular/core/src/render3/pipe';
 
 @Injectable()
   export class NavigationService {
@@ -30,16 +31,39 @@ import { Links } from './links';
         );
     }
 
+    changeStatus(id, link) {
+      return this.http.patch('api/admin/navigation/' + id, link)
+        .pipe(
+          tap(data => this.status = data),
+          catchError(err => this.handleError(err))
+        );
+    }
+
+    updateLink(id, link) {
+      return this.http.patch('api/admin/navigation/' + id, link)
+        .pipe(
+          tap(data => this.status = data),
+          catchError(err => this.handleError(err))
+        );
+    }
+
+    removeLink(id) {
+      return this.http.delete('api/admin/navigation/' + id)
+        .pipe(
+          tap(data => this.status = data),
+          catchError(err => this.handleError(err))
+        );
+    }
+
     private handleError( err: HttpErrorResponse) {
       if (err.error instanceof ErrorEvent) {
-        console.error('An error ocurred:', err.error.message);
+        console.error('An error occurred:', err.error.message);
       } else {
         console.error(
           `Backend returned code ${err.status}, ` +
-          `Body was: ${err.error}`
-        );
+          `body was: ${err.error}`);
       }
-
-      return throwError(`Something bad happened: ${err.error.message}`);
+      return throwError(
+        'Something bad happened; please try again later.');
     }
   }
