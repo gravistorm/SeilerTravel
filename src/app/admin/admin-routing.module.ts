@@ -6,6 +6,7 @@ import { AdminGuardService } from './admin-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginService } from './login/login.service';
 import { NavigationComponent } from './navigation/navigation.component';
+import { BannerComponent } from './banner/banner.component';
 
 const adminRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +20,8 @@ const adminRoutes: Routes = [
         // canActivateChild: [AdminGuardService],
         children: [
           { path: 'dashboard', component: DashboardComponent },
-          { path: 'navigation', component: NavigationComponent }
+          { path: 'navigation', component: NavigationComponent },
+          { path: 'banner', component: BannerComponent }
         ]
       }
     ]

@@ -27,10 +27,12 @@ require('./config/passport')(app, dbConfig);
 const loginRouter = require('./src/admin/routes/loginRouter')(dbConfig);
 const userRouter = require('./src/admin/routes/userRouter')(dbConfig);
 const navRouter = require('./src/admin/routes/navRouter')(dbConfig);
+const bannerRouter = require('./src/admin/routes/bannerRouter')(dbConfig);
 
 app.use('/admin', loginRouter);
-app.use('/admin/navigation', navRouter);
 app.use('/admin/user', userRouter);
+app.use('/admin/navigation', navRouter);
+app.use('/admin/banner', bannerRouter);
 
 app.get('/books', async (req, res) => {
   let url = 'mongodb://localhost:27017';

@@ -1,0 +1,14 @@
+
+.close {
+  transition: all 0.3s ease;
+  color: rgb(255, 255, 255, 0.87);
+}
+
+.close:hover {
+  color: rgb(255, 255, 255);
+}
+
+.modal-content, .modal-header {
+  border-radius: 0;
+  border: none;
+}

@@ -1,33 +1,36 @@
+<app-alerts [alert]= 'alerts'></app-alerts>
 <div class="container-fluid">
   <div class="row p-4 align-items-center">
-    <div *ngFor="let link of links" [ngClass]=" (link.status) ? 'col-12 col-lg-3 shadow-sm py-2 mr-4 mb-4 bg-primary' : 'col-12 col-lg-3 shadow-sm py-2 mr-4 mb-4 newItemDisable'" (click)="showOptions(link._id)">
+    <div *ngFor="let link of links" [ngClass]=" (link.status) ? 'col-12 col-xl-3 shadow-sm py-2 mr-4 mb-4 bg-primary' : 'col-12 col-lg-3 shadow-sm py-2 mr-4 mb-4 newItemDisable'" (click)="showOptions(link._id)">
       <div class="h2 align-middle mb-0" *ngIf="showId != link._id">
         <span>{{link.name}}</span><span class="float-right">{{link.position}}</span>
       </div>
-      <div *ngIf="showId === link._id">
+      <div *ngIf="link._id === showId">
         <div class="form-row mb-2">
           <div class="col-6 align-middle">
-            <input class="form-control" [(ngModel)]="link.name" [readonly]="!link.status">
+            <label for="linkName" class="sr-only"></label>
+            <input class="form-control" [(ngModel)]="link.name" id="linkName" [readonly]="!link.status">
           </div>
           <div class="col-4 align-middle">
-            <input class="form-control" [(ngModel)]="link.position" [readonly]="!link.status">
+            <label for="linkPosition" class="sr-only"></label>
+            <input class="form-control" [(ngModel)]="link.position" id="linkPosition" [readonly]="!link.status">
           </div>
           <div class="col-2 h3 text-center">
-            <span [ngClass]="(link.status) ? 'active' : 'inactive'" (click)="changeStatus(link)"><i class="fas fa-power-off align-middle"></i></span>
+            <span [ngClass]="(link.status) ? 'on' : 'off'" (click)="changeStatus(link)"><i class="fas fa-power-off align-middle"></i></span>
         </div>
       </div>
       <div *ngIf="link.status" class="form-row">
-        <div class="col-6">
-          <button type="button" class="shadow-sm btn btn-block btn-primary-light danger" (click)="removeLink(link)"><i class="fas fa-times fa-2x"></i></button>
+        <div class="col-6 shadow-sm">
+          <button type="button" class="btn btn-block btn-primary-light danger" (click)="removeLink(link)"><i class="fas fa-times fa-2x"></i></button>
         </div>
-        <div class="col-6">
-          <button type="button" class="shadow-sm btn btn-block btn-primary-light success" (click)="updateLink(link)"><i class="fas fa-check fa-2x"></i></button>
+        <div class="col-6 shadom-sm">
+          <button type="button" class="btn btn-block btn-primary-light success" (click)="updateLink(link)"><i class="fas fa-check fa-2x"></i></button>
         </div>
       </div>
     </div>
   </div>
     
-    <div class="col-12 col-lg-3 shadow-sm newItem py-2 mb-4" (click)="showForm()" style="height:fit-content">
+    <div class="col-12 col-xl-3 shadow-sm newItem py-2 mb-4" (click)="showForm()" style="height:fit-content">
       <div class="h3 mb-0 text-center" *ngIf="!show; else newForm">
         <span><i class="fas fa-plus fa-lg align-middle"></i></span>
       </div>

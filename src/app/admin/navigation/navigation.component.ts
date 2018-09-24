@@ -19,6 +19,10 @@ export class NavigationComponent implements OnInit {
   links: Links[];
   showId: string;
   show = false;
+  alerts = {
+    msg: {},
+    type: ''
+  };
 
   constructor( private _navService: NavigationService ) { }
 
@@ -32,11 +36,22 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  add () {
+  refresh() {
+    this._navService.getLink()
+      .subscribe(links => {
+        this.links = links;
+      },
+      error => this.errorMessage = <any>error);
+  }
+
+  add() {
     return this._navService.createLink(this.link)
       .subscribe(data => {
-        this.links.push(this.link);
+        this.refresh();
         this.show = !this.show;
+        this.link.name = '';
+        this.alerts.msg = this._navService.status;
+        this.alerts.type = this._navService.type;
         console.log(data);
       },
       error => this.errorMessage = <any>error);
@@ -47,8 +62,9 @@ export class NavigationComponent implements OnInit {
     link.status = !link.status;
 
     return this._navService.changeStatus(id, link)
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(() => {
+        this.alerts.msg = this._navService.status;
+        this.alerts.type = this._navService.type;
         this.showId = '';
       }),
       error => this.errorMessage = <any>error;
@@ -58,8 +74,9 @@ export class NavigationComponent implements OnInit {
     const id = link._id;
 
     return this._navService.updateLink(id, link)
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(() => {
+        this.alerts.msg = this._navService.status;
+        this.alerts.type = this._navService.type;
         this.showId = '';
       }),
       error => this.errorMessage = <any>error;
@@ -70,8 +87,11 @@ export class NavigationComponent implements OnInit {
       const id = link._id;
 
       return this._navService.removeLink(id)
-        .subscribe(data => {
-          console.log(data);
+        .subscribe(() => {
+          this.alerts.msg = this._navService.status;
+          this.alerts.type = this._navService.type;
+          console.log(this.alerts.msg);
+          console.log(this.alerts.type);
           for (let i = 0; i < this.links.length; i++) {
             if (this.links[i].name === link.name) {
               this.links.splice(i, 1);

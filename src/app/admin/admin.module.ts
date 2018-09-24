@@ -7,8 +7,11 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NavbarComponent } from './share/navbar/navbar.component';
-import { NavigationService } from './navigation/navigation.service';
 import { AlertsComponent } from './share/alerts/alerts.component';
+import { BannerComponent } from './banner/banner.component';
+
+import { NavigationService } from './navigation/navigation.service';
+import { BannerService } from './banner/banner.service';
 
 @NgModule({
   imports: [
@@ -20,11 +23,13 @@ import { AlertsComponent } from './share/alerts/alerts.component';
     LoginComponent,
     DashboardComponent,
     NavigationComponent,
+    BannerComponent,
     NavbarComponent,
     AlertsComponent
   ],
   providers: [
-    NavigationService
+    NavigationService,
+    BannerService
   ]
 })
 export class AdminModule { }

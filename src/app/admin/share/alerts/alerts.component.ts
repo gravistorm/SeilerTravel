@@ -8,7 +8,12 @@ import { Component, Input } from '@angular/core';
 
 export class AlertsComponent {
   @Input() alert: {
-            msg: string,
+            msg: {},
             type: string
           };
+
+  onClick() {
+    this.alert.msg = {};
+    this.alert.type = '';
+  }
 }

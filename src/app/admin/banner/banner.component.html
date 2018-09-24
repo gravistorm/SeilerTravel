@@ -1,0 +1,53 @@
+<app-alerts [alert]= 'alerts'></app-alerts>
+
+<div class="container-fluid">
+  <div class="row p-4 align-items-center">
+    <div *ngFor="let banner of banners" class="col-12 col-lg-5 shadow-sm mr-4 mb-4 p-0">
+      <div class="card">
+        <img class="card-img-top" [src]="banner.path" [alt]="banner.name" >
+        <div class="card-body">
+          <h4 class="card-title">{{banner.name}}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{(banner.status) ? 'Activo' : 'Inactivo'}}</h6>
+          <p class="card-text">Posición: {{banner.position}}</p>
+          <button type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5 py-2 mb-4 shadow-sm newItem">
+      <div class="h3 mb-0 text-center" data-toggle="modal" data-target="#newBanner">
+        <span><i class="fas fa-plus fa-lg align-middle"></i></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newBanner" tabindex="-1" role="dialog" aria-labelledby="New Banner Form" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Nuevo Banner</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="bannerName">Nombre</label>
+          <input type="text" class="form-control" id="bannerName" [(ngModel)]="banner.name">
+        </div>
+        <div class="form-group">
+          <label for="bannerPosition">Prioridad</label>
+          <input type="number" class="form-control" id="bannerPosition" [(ngModel)]="banner.position">
+        </div>
+        <div class="form-group">
+          <label for="bannerImage">Imagen</label>
+          <input type="file" class="form-control" id="bannerImage" (change)="uploadFile($event)">
+        </div>
+        <div class="col-4 shadow-sm float-right px-0">
+          <button type="button" class="py-1 btn-block btn btn-primary" (click)="add()">GUARDAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

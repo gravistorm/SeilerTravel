@@ -22,11 +22,10 @@ function navController (dbConfig) {
 
         const result = await col.insertOne(link);
         client.close();
-
         if (result) {
-          res.json(result);
+          res.json(link._id);
         } else {
-          res.send('Error creating a link');
+          res.json('Error creating a link');
         }
       } catch (err) {
         debug(err.stack);
@@ -42,7 +41,7 @@ function navController (dbConfig) {
         const db = await client.db(dbConfig.dataB);
         const col = await db.collection('link');
 
-        const users = await col.find().toArray();
+        const users = await col.find().sort({position: 1}).toArray();
         client.close();
 
         if (users) {
